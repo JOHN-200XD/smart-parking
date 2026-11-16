@@ -1,4 +1,4 @@
-import { PageHeading, SectionCard } from './AdminShared.jsx';
+import { PageHeading, SectionCard } from '../components/AdminShared.jsx';
 import { Plus, Pencil, Trash2, Users, X } from 'lucide-react';
 
 export default function AdminPermissionsPage(props) {

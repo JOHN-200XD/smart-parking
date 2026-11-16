@@ -1,7 +1,7 @@
 // src/pages/admin/AdminPortal.jsx
 import React, { useState } from 'react';
-import AdminLogin from './adminLogin';
-import AdminDashboard from './AdminDashboard';
+import AdminLogin from './auth/AdminLogin.jsx';
+import AdminDashboard from './dashboard/AdminDashboard.jsx';
 import { mockUsers } from '../../data/mockData';
 
 function getSavedUser() {

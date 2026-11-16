@@ -1,4 +1,4 @@
-import { PageHeading, StatCard, SectionCard, StatusBadge, formatNumber } from './AdminShared.jsx';
+import { PageHeading, StatCard, SectionCard, StatusBadge, formatNumber } from '../components/AdminShared.jsx';
 import { Building2, CheckCircle2, MapPin, CarFront, ChevronRight } from 'lucide-react';
 
 export default function AdminOverviewPage(props) {

@@ -1,4 +1,4 @@
-import { PageHeading, StatCard, SectionCard } from './AdminShared.jsx';
+import { PageHeading, StatCard, SectionCard } from '../components/AdminShared.jsx';
 import { CarFront, CheckCircle2, Plus, Zap, X } from 'lucide-react';
 
 export default function AdminParkingMapPage(props) {

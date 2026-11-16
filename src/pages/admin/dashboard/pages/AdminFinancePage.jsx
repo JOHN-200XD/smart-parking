@@ -1,7 +1,7 @@
-import { PageHeading, StatCard, SectionCard, formatNumber } from './AdminShared.jsx';
+import { PageHeading, StatCard, SectionCard, formatNumber } from '../components/AdminShared.jsx';
 import { Download, CreditCard, CarFront, CheckCircle2 } from 'lucide-react';
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
-import { mockHourlyRevenue } from '../../data/mockData';
+import { mockHourlyRevenue } from '../../../../data/mockData';
 
 export default function AdminFinancePage(props) {
   const { exportData, totalRevenue, vehicles } = props;

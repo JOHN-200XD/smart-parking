@@ -1,6 +1,6 @@
-import { PageHeading, SectionCard } from './AdminShared.jsx';
+import { PageHeading, SectionCard } from '../components/AdminShared.jsx';
 import { Download } from 'lucide-react';
-import { mockSlotHeatmap, mockCarBrands } from '../../data/mockData';
+import { mockSlotHeatmap, mockCarBrands } from '../../../../data/mockData';
 
 export default function AdminActivityPage(props) {
   const { exportData } = props;

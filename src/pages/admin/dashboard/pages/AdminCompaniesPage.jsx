@@ -1,4 +1,4 @@
-import { PageHeading, StatCard, SectionCard, StatusBadge, DetailItem } from './AdminShared.jsx';
+import { PageHeading, StatCard, SectionCard, StatusBadge, DetailItem } from '../components/AdminShared.jsx';
 import { Download, Plus, Search, Pencil, Trash2, X, Building2, CheckCircle2 } from 'lucide-react';
 
 export default function AdminCompaniesPage(props) {

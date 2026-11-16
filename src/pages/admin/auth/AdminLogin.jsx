@@ -1,8 +1,8 @@
 // src/pages/admin/AdminLogin.jsx
 import React, { useState } from 'react';
 import { Lock, User, ShieldAlert } from 'lucide-react';
-import { mockUsers } from "../../data/mockData";
-import LanguageToggle from '../../components/LanguageToggle';
+import { mockUsers } from "../../../data/mockData";
+import LanguageToggle from '../../../components/LanguageToggle';
 
 export default function AdminLogin({ onLoginSuccess, language = 'th', onToggleLanguage }) {
   const [username, setUsername] = useState('');

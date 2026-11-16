@@ -13,7 +13,15 @@ export default function AdminLogin({ onLoginSuccess }) {
     setErrorMsg('');
 
     // ตรวจสอบกับ Mock Data
-    const foundUser = mockUsers.find(
+    let users = mockUsers;
+    try {
+      const savedUsers = JSON.parse(localStorage.getItem('smart_parking_users') || 'null');
+      if (Array.isArray(savedUsers)) users = savedUsers;
+    } catch {
+      users = mockUsers;
+    }
+
+    const foundUser = users.find(
       (u) => u.username === username.trim() && u.password === password
     );
 

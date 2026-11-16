@@ -241,17 +241,17 @@ export default function UserPaymentFlow({ language = 'th', onToggleLanguage }) {
                 <div className="grid grid-cols-3 gap-2">
                   <div className="min-w-0 rounded-lg border border-[#E3E8EF] bg-white p-2">
                     <div className="mb-2 flex h-7 w-7 items-center justify-center rounded-md" style={{ backgroundColor: "#F5F7FA", color: "#5E6C84" }}><Search size={19} /></div>
-                    <div><strong className="text-[#5E6C84]">ค้นหาทะเบียน</strong><span className="text-[#7A869A]">กรอกทะเบียนรถของคุณ</span></div>
+                    <div><strong className="block text-[13px] font-semibold text-[#5E6C84]">ค้นหาทะเบียน</strong><span className="mt-1 block text-[11px] leading-snug text-[#7A869A]">กรอกทะเบียนรถของคุณ</span></div>
                   </div>
                   <div className="hidden" />
                   <div className="min-w-0 rounded-lg border border-[#E3E8EF] bg-white p-2">
                     <div className="mb-2 flex h-7 w-7 items-center justify-center rounded-md" style={{ backgroundColor: "#F5F7FA", color: "#5E6C84" }}><Clock3 size={19} /></div>
-                    <div><strong className="text-[#5E6C84]">เช็คชั่วโมงจอด</strong><span className="text-[#7A869A]">ตรวจสอบระยะเวลาจอด</span></div>
+                    <div><strong className="block text-[13px] font-semibold text-[#5E6C84]">เช็คชั่วโมงจอด</strong><span className="mt-1 block text-[11px] leading-snug text-[#7A869A]">ตรวจสอบระยะเวลาจอด</span></div>
                   </div>
                   <div className="hidden" />
                   <div className="min-w-0 rounded-lg border border-[#E3E8EF] bg-white p-2">
                     <div className="mb-2 flex h-7 w-7 items-center justify-center rounded-md" style={{ backgroundColor: "#F5F7FA", color: "#5E6C84" }}><WalletCards size={19} /></div>
-                    <div><strong className="text-[#5E6C84]">ชำระค่าจอด</strong><span className="text-[#7A869A]">ตรวจสอบยอดและชำระเงิน</span></div>
+                    <div><strong className="block text-[13px] font-semibold text-[#5E6C84]">ชำระค่าจอด</strong><span className="mt-1 block text-[11px] leading-snug text-[#7A869A]">ตรวจสอบยอดและชำระเงิน</span></div>
                   </div>
                 </div>
               </section>

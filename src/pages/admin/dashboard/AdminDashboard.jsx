@@ -37,9 +37,9 @@ const DEFAULT_ROLE_PERMISSIONS = {
 };
 
 const PERMISSION_OPTIONS = [
-  { key: 'live_map', label: 'เธเธฑเธเนเธชเธ”เธเธชเธ–เธฒเธเธฐเธเนเธญเธเธเธญเธ”' },
-  { key: 'finance', label: 'เธฃเธฒเธขเธเธฒเธเธฃเธฒเธขเธฃเธฑเธเธเนเธฒเธเธญเธ”' },
-  { key: 'activity', label: 'เธฃเธฒเธขเธเธฒเธเธเธฒเธฃเนเธเนเธเธฒเธเนเธฅเธฐเธเธงเธฒเธกเธซเธเธฒเนเธเนเธ' },
+  { key: 'live_map', label: 'ผังแสดงสถานะช่องจอด' },
+  { key: 'finance', label: 'รายงานรายรับค่าจอด' },
+  { key: 'activity', label: 'รายงานการใช้งานและความหนาแน่น' },
 ];
 
 export default function AdminDashboard({ currentUser, onLogout, vehicles: vehiclesProp, slots: slotsProp, setSlots: setSlotsProp, language = 'th', onToggleLanguage }) {
@@ -109,7 +109,7 @@ export default function AdminDashboard({ currentUser, onLogout, vehicles: vehicl
   const roleLabel = isSuperAdmin
     ? 'Super Admin'
     : isCompanyAdmin ? 'Company Admin' : 'Staff';
-  const company = companies.find((item) => item.id === currentUser?.companyId) || companies[0] || { name: 'เนเธกเนเธเธเธเนเธญเธกเธนเธฅเธญเธฒเธเธฒเธฃ', status: 'inactive', branchCount: 0, parkingLotCount: 0 };
+  const company = companies.find((item) => item.id === currentUser?.companyId) || companies[0] || { name: 'ไม่พบข้อมูลอาคาร', status: 'inactive', branchCount: 0, parkingLotCount: 0 };
   const slots = Array.isArray(slotsProp) ? slotsProp : localSlots;
   const vehicles = Array.isArray(vehiclesProp) ? vehiclesProp : mockCars;
 
@@ -140,13 +140,13 @@ export default function AdminDashboard({ currentUser, onLogout, vehicles: vehicl
   };
 
   const navItems = [
-    ...(isSuperAdmin || isCompanyAdmin ? [{ id: 'overview', label: 'เธ เธฒเธเธฃเธงเธก', icon: LayoutDashboard, section: 'เธซเธเนเธฒเธซเธฅเธฑเธ' }] : []),
-    ...(isSuperAdmin ? [{ id: 'companies', label: 'เธเธฑเธ”เธเธฒเธฃเธญเธฒเธเธฒเธฃ', icon: Building2, section: 'เนเธเธฅเธ•เธเธญเธฃเนเธก' }] : []),
-    ...(canAccessMenu('map') ? [{ id: 'map', label: 'เธเธฑเธเธเนเธญเธเธเธญเธ”', icon: MapPin, section: 'เธเธฒเธฃเธเธฑเธ”เธเธฒเธฃเธฅเธฒเธเธเธญเธ”' }] : []),
-    ...(canAccessMenu('vehicles') ? [{ id: 'vehicles', label: 'เธเนเธเธซเธฒเธ—เธฐเน€เธเธตเธขเธเธฃเธ–', icon: CarFront, section: 'เธเธฒเธฃเธเธฑเธ”เธเธฒเธฃเธฅเธฒเธเธเธญเธ”' }] : []),
-    ...(canAccessMenu('finance') ? [{ id: 'finance', label: 'เธฃเธฒเธขเธเธฒเธเธฃเธฒเธขเธฃเธฑเธเธเนเธฒเธเธญเธ”', icon: CreditCard, section: 'เธฃเธฒเธขเธเธฒเธ' }] : []),
-    ...(canAccessMenu('activity') ? [{ id: 'activity', label: 'เธเธฒเธฃเนเธเนเธเธฒเธเนเธฅเธฐ Heatmap', icon: Activity, section: 'เธฃเธฒเธขเธเธฒเธ' }] : []),
-    ...(canAccessRoles ? [{ id: 'roles', label: 'เธเธนเนเนเธเนเธเธฒเธเนเธฅเธฐเธชเธดเธ—เธเธดเน', icon: Users, section: 'เธ•เธฑเนเธเธเนเธฒเธฃเธฐเธเธ' }] : []),
+    ...(isSuperAdmin || isCompanyAdmin ? [{ id: 'overview', label: 'ภาพรวม', icon: LayoutDashboard, section: 'หน้าหลัก' }] : []),
+    ...(isSuperAdmin ? [{ id: 'companies', label: 'จัดการอาคาร', icon: Building2, section: 'แพลตฟอร์ม' }] : []),
+    ...(canAccessMenu('map') ? [{ id: 'map', label: 'ผังช่องจอด', icon: MapPin, section: 'การจัดการลานจอด' }] : []),
+    ...(canAccessMenu('vehicles') ? [{ id: 'vehicles', label: 'ค้นหาทะเบียนรถ', icon: CarFront, section: 'การจัดการลานจอด' }] : []),
+    ...(canAccessMenu('finance') ? [{ id: 'finance', label: 'รายงานรายรับค่าจอด', icon: CreditCard, section: 'รายงาน' }] : []),
+    ...(canAccessMenu('activity') ? [{ id: 'activity', label: 'การใช้งานและ Heatmap', icon: Activity, section: 'รายงาน' }] : []),
+    ...(canAccessRoles ? [{ id: 'roles', label: 'ผู้ใช้งานและสิทธิ์', icon: Users, section: 'ตั้งค่าระบบ' }] : []),
   ];
 
   const companyStats = useMemo(() => ({
@@ -200,8 +200,8 @@ export default function AdminDashboard({ currentUser, onLogout, vehicles: vehicl
   };
 
   const deleteManagedUser = (user) => {
-    const roleLabel = user.role === 'admin' ? 'เธเธนเนเธ”เธนเนเธฅ' : 'เน€เธเนเธฒเธซเธเนเธฒเธ—เธตเนเธฅเธฒเธเธเธญเธ”';
-    if (!window.confirm(`เธ•เนเธญเธเธเธฒเธฃเธฅเธ${roleLabel} ${user.name} เนเธเนเธซเธฃเธทเธญเนเธกเน?`)) return;
+    const roleLabel = user.role === 'admin' ? 'ผู้ดูแล' : 'เจ้าหน้าที่ลานจอด';
+    if (!window.confirm(`ต้องการลบ${roleLabel} ${user.name} ใช่หรือไม่?`)) return;
     const nextUsers = userAccounts.filter((item) => item.id !== user.id);
     const nextOverrides = { ...userPermissionOverrides };
     delete nextOverrides[user.id];
@@ -217,7 +217,7 @@ export default function AdminDashboard({ currentUser, onLogout, vehicles: vehicl
     const username = adminForm.username.trim();
     if (!adminForm.name.trim() || !username || !adminForm.password) return;
     if (userAccounts.some((user) => user.username.toLowerCase() === username.toLowerCase())) {
-      alert('เธเธทเนเธญเธเธนเนเนเธเนเธเธตเนเธกเธตเธญเธขเธนเนเนเธฅเนเธง เธเธฃเธธเธ“เธฒเนเธเนเธเธทเนเธญเธญเธทเนเธ');
+      alert('ชื่อผู้ใช้นี้มีอยู่แล้ว กรุณาใช้ชื่ออื่น');
       return;
     }
     const newAdmin = {
@@ -238,15 +238,15 @@ export default function AdminDashboard({ currentUser, onLogout, vehicles: vehicl
 
   const exportData = (type) => {
     let rows = [];
-    if (type === 'เธญเธฒเธเธฒเธฃ') {
+    if (type === 'อาคาร') {
       rows = [
-        ['เธญเธฒเธเธฒเธฃ', 'เธฃเธซเธฑเธชเธญเธฒเธเธฒเธฃ', 'เธชเธ–เธฒเธเธฐ', 'เธเธณเธเธงเธเธชเธฒเธเธฒ', 'เธเธณเธเธงเธเธฅเธฒเธเธเธญเธ”'],
+        ['อาคาร', 'รหัสอาคาร', 'สถานะ', 'จำนวนสาขา', 'จำนวนลานจอด'],
         ...companies.map((item) => [item.name, item.code, item.status, item.branchCount, item.parkingLotCount]),
       ];
-    } else if (type === 'เธเธฒเธฃเน€เธเธดเธ') {
-      rows = [['เน€เธงเธฅเธฒ', 'เธฃเธฒเธขเธฃเธฑเธเธเนเธฒเธเธญเธ” (เธเธฒเธ—)'], ...mockHourlyRevenue.map((item) => [item.time, item.revenue])];
+    } else if (type === 'การเงิน') {
+      rows = [['เวลา', 'รายรับค่าจอด (บาท)'], ...mockHourlyRevenue.map((item) => [item.time, item.revenue])];
     } else {
-      rows = [['เธฃเธธเนเธเธฃเธ–', 'เธเธณเธเธงเธเธฃเธ–', 'เน€เธงเธฅเธฒเธเธญเธ”เน€เธเธฅเธตเนเธข (เธเธฑเนเธงเนเธกเธ)'], ...mockCarBrands.map((item) => [item.brand, item.count, item.avgHours])];
+      rows = [['รุ่นรถ', 'จำนวนรถ', 'เวลาจอดเฉลี่ย (ชั่วโมง)'], ...mockCarBrands.map((item) => [item.brand, item.count, item.avgHours])];
     }
     const csv = `\uFEFF${rows.map((row) => row.map((cell) => `"${String(cell ?? '').replaceAll('"', '""')}"`).join(',')).join('\n')}`;
     const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8;' }));
@@ -269,7 +269,7 @@ export default function AdminDashboard({ currentUser, onLogout, vehicles: vehicl
   };
 
   const deleteCompany = (item) => {
-    if (!window.confirm(`เธ•เนเธญเธเธเธฒเธฃเธฅเธเธญเธฒเธเธฒเธฃ ${item.name} เนเธเนเธซเธฃเธทเธญเนเธกเน?`)) return;
+    if (!window.confirm(`ต้องการลบอาคาร ${item.name} ใช่หรือไม่?`)) return;
     persistCompanies(companies.filter((companyItem) => companyItem.id !== item.id));
     if (selectedCompanyId === item.id) setSelectedCompanyId(null);
   };
@@ -301,7 +301,7 @@ export default function AdminDashboard({ currentUser, onLogout, vehicles: vehicl
     if (!name || !code) return;
     const duplicateCode = companies.some((item) => item.code?.toUpperCase() === code && item.id !== editingCompanyId);
     if (duplicateCode) {
-      alert('เธฃเธซเธฑเธชเธญเธฒเธเธฒเธฃเธเธตเนเธกเธตเธญเธขเธนเนเนเธฅเนเธง เธเธฃเธธเธ“เธฒเนเธเนเธฃเธซเธฑเธชเธญเธทเนเธ');
+      alert('รหัสอาคารนี้มีอยู่แล้ว กรุณาใช้รหัสอื่น');
       return;
     }
 
@@ -359,28 +359,28 @@ export default function AdminDashboard({ currentUser, onLogout, vehicles: vehicl
   else if (activeMenu === 'finance' && canAccessMenu('finance')) pageContent = <AdminFinancePage {...pageProps} />;
   else if (activeMenu === 'activity' && canAccessMenu('activity')) pageContent = <AdminActivityPage {...pageProps} />;
   else if (activeMenu === 'roles' && canAccessMenu('roles')) pageContent = <AdminPermissionsPage {...pageProps} />;
-  else pageContent = <div className="rounded-xl border border-[#E3E8EF] bg-white p-6"><h2 className="font-semibold text-[#172B4D]">เธขเธฑเธเนเธกเนเธกเธตเธชเธดเธ—เธเธดเนเน€เธเนเธฒเธ–เธถเธเน€เธกเธเธนเธเธตเน</h2><p className="mt-1 text-sm text-[#5E6C84]">เธเธฃเธธเธ“เธฒเธ•เธดเธ”เธ•เนเธญเธเธนเนเธ”เธนเนเธฅเธฃเธฐเธเธเน€เธเธทเนเธญเธเธญเธชเธดเธ—เธเธดเนเน€เธเธดเนเธกเน€เธ•เธดเธก</p></div>;
+  else pageContent = <div className="rounded-xl border border-[#E3E8EF] bg-white p-6"><h2 className="font-semibold text-[#172B4D]">ยังไม่มีสิทธิ์เข้าถึงเมนูนี้</h2><p className="mt-1 text-sm text-[#5E6C84]">กรุณาติดต่อผู้ดูแลระบบเพื่อขอสิทธิ์เพิ่มเติม</p></div>;
 
   return (
     <div className="flex min-h-[calc(100vh-60px)] bg-[#F5F7FA] text-[#172B4D]">
-      {mobileNavOpen && <button aria-label="เธเธดเธ”เน€เธกเธเธน" onClick={() => setMobileNavOpen(false)} className="fixed inset-0 z-40 bg-slate-900/30 lg:hidden" />}
+      {mobileNavOpen && <button aria-label="ปิดเมนู" onClick={() => setMobileNavOpen(false)} className="fixed inset-0 z-40 bg-slate-900/30 lg:hidden" />}
       <aside className={`fixed inset-y-0 left-0 z-50 flex w-64 shrink-0 flex-col border-r border-[#E3E8EF] bg-white transition-all duration-200 lg:inset-y-auto lg:top-[60px] lg:bottom-auto lg:h-[calc(100vh-60px)] lg:translate-x-0 ${desktopNavCollapsed ? 'lg:w-20' : 'lg:w-64'} ${mobileNavOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className={`flex h-16 items-center border-b border-[#E3E8EF] px-5 ${desktopNavCollapsed ? 'justify-center lg:px-3' : 'justify-between'}`}>
           <div className="flex items-center gap-2.5">
             <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#1685F8] text-white"><CarFront size={20} /></div>
             <div className={desktopNavCollapsed ? 'lg:hidden' : ''}><p className="text-sm font-bold text-[#172B4D]">Smart Parking</p><p className="text-[10px] text-[#7A869A]">Management System</p></div>
           </div>
-          <button onClick={() => setDesktopNavCollapsed((collapsed) => !collapsed)} className="hidden rounded-md p-1 text-[#7A869A] hover:bg-[#F5F7FA] lg:block" aria-label={desktopNavCollapsed ? 'เนเธชเธ”เธเน€เธกเธเธน' : 'เธเนเธญเธเน€เธกเธเธน'} title={desktopNavCollapsed ? 'เนเธชเธ”เธเน€เธกเธเธน' : 'เธเนเธญเธเน€เธกเธเธน'}>{desktopNavCollapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}</button>
-          <button onClick={() => setMobileNavOpen(false)} className="rounded-md p-1 text-[#7A869A] hover:bg-[#F5F7FA] lg:hidden" aria-label="เธเธดเธ”เน€เธกเธเธน"><X size={18} /></button>
+          <button onClick={() => setDesktopNavCollapsed((collapsed) => !collapsed)} className="hidden rounded-md p-1 text-[#7A869A] hover:bg-[#F5F7FA] lg:block" aria-label={desktopNavCollapsed ? 'แสดงเมนู' : 'ซ่อนเมนู'} title={desktopNavCollapsed ? 'แสดงเมนู' : 'ซ่อนเมนู'}>{desktopNavCollapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}</button>
+          <button onClick={() => setMobileNavOpen(false)} className="rounded-md p-1 text-[#7A869A] hover:bg-[#F5F7FA] lg:hidden" aria-label="ปิดเมนู"><X size={18} /></button>
         </div>
         <div className={`border-b border-[#E3E8EF] px-5 py-4 ${desktopNavCollapsed ? 'lg:hidden' : ''}`}>
-          <p className="text-[10px] font-semibold uppercase tracking-wider text-[#7A869A]">เธเธฑเธเธเธตเธ—เธตเนเน€เธเนเธฒเธชเธนเนเธฃเธฐเธเธ</p>
-          <p className="mt-1 truncate text-sm font-semibold text-[#172B4D]">{currentUser?.name || 'เธเธนเนเธ”เธนเนเธฅเธฃเธฐเธเธ'}</p>
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-[#7A869A]">บัญชีที่เข้าสู่ระบบ</p>
+          <p className="mt-1 truncate text-sm font-semibold text-[#172B4D]">{currentUser?.name || 'ผู้ดูแลระบบ'}</p>
           <div className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-[#F2F8FF] px-2.5 py-1 text-[10px] font-semibold text-[#1685F8]"><ShieldCheck size={12} /> {roleLabel}</div>
           {isCompanyAdmin && <p className="mt-2 truncate text-xs text-[#7A869A]">{company.name}</p>}
         </div>
         <nav className="min-h-0 flex-1 overflow-y-auto px-3 py-4">
-          {['เธซเธเนเธฒเธซเธฅเธฑเธ', 'เนเธเธฅเธ•เธเธญเธฃเนเธก', 'เธเธฒเธฃเธเธฑเธ”เธเธฒเธฃเธฅเธฒเธเธเธญเธ”', 'เธฃเธฒเธขเธเธฒเธ', 'เธ•เธฑเนเธเธเนเธฒเธฃเธฐเธเธ'].map((section) => {
+          {['หน้าหลัก', 'แพลตฟอร์ม', 'การจัดการลานจอด', 'รายงาน', 'ตั้งค่าระบบ'].map((section) => {
             const items = navItems.filter((item) => item.section === section);
             if (!items.length) return null;
             return <div key={section} className="mb-5">
@@ -394,23 +394,23 @@ export default function AdminDashboard({ currentUser, onLogout, vehicles: vehicl
           })}
         </nav>
         <div className="border-t border-[#E3E8EF] p-3">
-          <button onClick={onLogout} title={desktopNavCollapsed ? 'เธญเธญเธเธเธฒเธเธฃเธฐเธเธ' : undefined} className={`flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-rose-600 hover:bg-rose-50 ${desktopNavCollapsed ? 'lg:justify-center' : ''}`}><LogOut size={17} /><span className={desktopNavCollapsed ? 'lg:hidden' : ''}>เธญเธญเธเธเธฒเธเธฃเธฐเธเธ</span></button>
-          <p className="px-3 pt-2 text-[10px] text-[#A0AAB8]">Smart Parking ยท Demo Version</p>
+          <button onClick={onLogout} title={desktopNavCollapsed ? 'ออกจากระบบ' : undefined} className={`flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-rose-600 hover:bg-rose-50 ${desktopNavCollapsed ? 'lg:justify-center' : ''}`}><LogOut size={17} /><span className={desktopNavCollapsed ? 'lg:hidden' : ''}>ออกจากระบบ</span></button>
+          <p className="px-3 pt-2 text-[10px] text-[#A0AAB8]">Smart Parking · Demo Version</p>
         </div>
       </aside>
 
       <div className={`flex min-w-0 flex-1 flex-col ${desktopNavCollapsed ? 'lg:ml-20' : 'lg:ml-64'}`}>
         <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-[#E3E8EF] bg-white px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3">
-            <button onClick={() => setMobileNavOpen(true)} className="rounded-lg border border-[#E3E8EF] p-2 text-[#5E6C84] hover:bg-[#F5F7FA] lg:hidden" aria-label="เน€เธเธดเธ”เน€เธกเธเธน"><Menu size={18} /></button>
-            <div><p className="text-sm font-semibold text-[#172B4D]">{isSuperAdmin ? 'Platform Administration' : company.name}</p><p className="text-[11px] text-[#7A869A]">เธฃเธฐเธเธเธเธฑเธ”เธเธฒเธฃเธฅเธฒเธเธเธญเธ”เธฃเธ–เธญเธฑเธเธเธฃเธดเธขเธฐ</p></div>
+            <button onClick={() => setMobileNavOpen(true)} className="rounded-lg border border-[#E3E8EF] p-2 text-[#5E6C84] hover:bg-[#F5F7FA] lg:hidden" aria-label="เปิดเมนู"><Menu size={18} /></button>
+            <div><p className="text-sm font-semibold text-[#172B4D]">{isSuperAdmin ? 'Platform Administration' : company.name}</p><p className="text-[11px] text-[#7A869A]">ระบบจัดการลานจอดรถอัจฉริยะ</p></div>
           </div>
-          <div className="flex items-center gap-2"><LanguageToggle language={language} onToggle={onToggleLanguage} /><div className="flex items-center gap-2 rounded-full border border-[#E3E8EF] bg-white px-3 py-1.5"><span className="h-2 w-2 rounded-full bg-emerald-500" /><span className="text-xs font-medium text-[#5E6C84]">เธฃเธฐเธเธเธ•เธฑเธงเธญเธขเนเธฒเธ</span></div></div>
+          <div className="flex items-center gap-2"><LanguageToggle language={language} onToggle={onToggleLanguage} /><div className="flex items-center gap-2 rounded-full border border-[#E3E8EF] bg-white px-3 py-1.5"><span className="h-2 w-2 rounded-full bg-emerald-500" /><span className="text-xs font-medium text-[#5E6C84]">ระบบตัวอย่าง</span></div></div>
         </header>
         <main className="w-full flex-1 p-4 sm:p-6 lg:p-8">
           <div className="mx-auto max-w-[1440px]">{pageContent}</div>
         </main>
-        <footer className="border-t border-[#E3E8EF] bg-white px-6 py-3 text-center text-[11px] text-[#A0AAB8]">ยฉ 2026 Smart Parking Management Platform</footer>
+        <footer className="border-t border-[#E3E8EF] bg-white px-6 py-3 text-center text-[11px] text-[#A0AAB8]">© 2026 Smart Parking Management Platform</footer>
       </div>
     </div>
   );

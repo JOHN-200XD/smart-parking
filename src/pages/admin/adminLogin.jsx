@@ -2,8 +2,9 @@
 import React, { useState } from 'react';
 import { Lock, User, ShieldAlert } from 'lucide-react';
 import { mockUsers } from "../../data/mockData";
+import LanguageToggle from '../../components/LanguageToggle';
 
-export default function AdminLogin({ onLoginSuccess }) {
+export default function AdminLogin({ onLoginSuccess, language = 'th', onToggleLanguage }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
@@ -37,6 +38,7 @@ export default function AdminLogin({ onLoginSuccess }) {
   return (
     <div className="min-h-[85vh] flex items-center justify-center p-4 bg-[#F5F7FA]">
       <div className="w-full max-w-md bg-white border border-[#E3E8EF] rounded-3xl p-8 shadow-2xl">
+        <div className="mb-3 flex justify-end"><LanguageToggle language={language} onToggle={onToggleLanguage} /></div>
         <div className="text-center mb-6">
           <div className="w-12 h-12 bg-[#1685F8]/10 text-[#1685F8] rounded-2xl flex items-center justify-center mx-auto mb-3 border border-[#1685F8]/20">
             <Lock size={24} />
@@ -93,9 +95,9 @@ export default function AdminLogin({ onLoginSuccess }) {
 
         <div className="mt-6 pt-4 border-t border-[#E3E8EF] text-[11px] text-[#7A869A] text-center space-y-1">
           <p>บัญชีทดสอบ:</p>
-          <p>ผู้ดูแลระบบ: <span className="text-[#172B4D] font-mono">superadmin / password123</span></p>
-          <p>ผู้ดูแลทั่วไป: <span className="text-[#172B4D] font-mono">admin / password123</span></p>
-          <p>เจ้าหน้าที่: <span className="text-[#172B4D] font-mono">staff / password123</span></p>
+          <p>ผู้ดูแลระบบ: <span className="text-[#172B4D] font-sans">superadmin / password123</span></p>
+          <p>ผู้ดูแลทั่วไป: <span className="text-[#172B4D] font-sans">admin / password123</span></p>
+          <p>เจ้าหน้าที่: <span className="text-[#172B4D] font-sans">staff / password123</span></p>
         </div>
       </div>
     </div>

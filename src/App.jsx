@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import UserPaymentFlow from "./pages/user/UserPaymentFlow";
 import KioskDisplays from "./pages/kiosk/KioskDisplays";
 import AdminPortal from "./pages/admin/AdminPortal";
@@ -16,7 +16,19 @@ function loadSavedSlots() {
 
 export default function App() {
   const [currentView, setCurrentView] = useState("user");
+  const [language, setLanguage] = useState(() => localStorage.getItem('smart_parking_language') || 'th');
   const [slots, setSlots] = useState(loadSavedSlots);
+
+  useEffect(() => {
+    document.documentElement.lang = language;
+  }, [language]);
+
+  const toggleLanguage = () => {
+    const nextLanguage = language === 'th' ? 'en' : 'th';
+    setLanguage(nextLanguage);
+    localStorage.setItem('smart_parking_language', nextLanguage);
+    document.documentElement.lang = nextLanguage;
+  };
 
   const handleSlotsChange = (nextSlots) => {
     setSlots(nextSlots);
@@ -50,10 +62,10 @@ export default function App() {
       </header>
 
       <main className="flex-1">
-        {currentView === "user" && <UserPaymentFlow />}
-        {currentView === "kiosk" && <KioskDisplays />}
+        {currentView === "user" && <UserPaymentFlow language={language} onToggleLanguage={toggleLanguage} />}
+        {currentView === "kiosk" && <KioskDisplays language={language} onToggleLanguage={toggleLanguage} />}
         {currentView === "admin" && (
-          <AdminPortal vehicles={mockCars} slots={slots} setSlots={handleSlotsChange} />
+          <AdminPortal vehicles={mockCars} slots={slots} setSlots={handleSlotsChange} language={language} onToggleLanguage={toggleLanguage} />
         )}
       </main>
     </div>

@@ -18,7 +18,7 @@ function getSavedUser() {
   }
 }
 
-export default function AdminPortal({ vehicles, slots, setSlots }) {
+export default function AdminPortal({ vehicles, slots, setSlots, language, onToggleLanguage }) {
   const [currentUser, setCurrentUser] = useState(getSavedUser);
 
   const handleLogin = (user) => {
@@ -31,7 +31,7 @@ export default function AdminPortal({ vehicles, slots, setSlots }) {
   };
 
   if (!currentUser) {
-    return <AdminLogin onLoginSuccess={handleLogin} />;
+    return <AdminLogin onLoginSuccess={handleLogin} language={language} onToggleLanguage={onToggleLanguage} />;
   }
 
   return (
@@ -41,6 +41,8 @@ export default function AdminPortal({ vehicles, slots, setSlots }) {
       vehicles={vehicles}
       slots={slots}
       setSlots={setSlots}
+      language={language}
+      onToggleLanguage={onToggleLanguage}
     />
   );
 }

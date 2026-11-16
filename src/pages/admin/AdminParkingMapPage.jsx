@@ -20,7 +20,7 @@ export default function AdminParkingMapPage(props) {
 
     const renderBay = (slot) => (
       <div key={slot.id} className={`relative flex min-h-[142px] flex-col justify-between rounded-xl border p-3 transition ${slot.occupied ? 'border-slate-300 bg-white' : 'border-[#B9D9FA] bg-[#F2F8FF]'}`}>
-        <div className="flex items-center justify-between gap-2"><span className="font-mono text-sm font-bold text-[#172B4D]">{slot.id}</span>{slot.isEV && <span className="inline-flex items-center gap-1 rounded-full bg-white px-2 py-1 text-[10px] font-semibold text-[#1685F8]"><Zap size={11} /> EV</span>}</div>
+        <div className="flex items-center justify-between gap-2"><span className="font-sans text-sm font-bold text-[#172B4D]">{slot.id}</span>{slot.isEV && <span className="inline-flex items-center gap-1 rounded-full bg-white px-2 py-1 text-[10px] font-semibold text-[#1685F8]"><Zap size={11} /> EV</span>}</div>
         <div className="flex justify-center py-2"><div className={`flex h-16 w-12 items-center justify-center rounded-xl border ${slot.occupied ? 'border-slate-300 bg-slate-100 text-slate-500' : 'border-[#B9D9FA] bg-white text-[#1685F8]'}`}><CarFront size={32} strokeWidth={1.7} /></div></div>
         <div className="flex items-center justify-between gap-2"><span className="flex items-center gap-1.5 text-[11px] font-semibold text-[#5E6C84]"><span className={`h-2 w-2 rounded-full ${slot.occupied ? 'bg-slate-500' : 'bg-[#1685F8]'}`} />{slot.occupied ? 'มีรถจอด' : 'ว่าง'}</span><span className="text-[10px] text-[#A0AAB8]">{slot.occupied ? 'Occupied' : 'Available'}</span></div>
       </div>

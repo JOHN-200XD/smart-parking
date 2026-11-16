@@ -32,7 +32,7 @@ export default function AdminActivityPage(props) {
             const secondaryText = item.density >= 70 ? 'text-white/90' : 'text-[#334155]';
             return (
               <div key={item.slot} className={`rounded-lg border border-black/5 p-3.5 ${heatLevel}`}>
-                <span className="font-mono text-sm font-bold">{item.slot}</span>
+                <span className="font-sans text-sm font-bold">{item.slot}</span>
                 <p className={`mt-3 text-xs ${secondaryText}`}>ความหนาแน่น: {item.label}</p>
               </div>
             );

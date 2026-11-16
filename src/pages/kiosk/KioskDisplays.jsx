@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Camera, CheckCircle2, XCircle, PhoneCall, QrCode, ArrowRight } from 'lucide-react';
 import { mockCars, mockSlots } from '../../data/mockData';
 import { calculateParkingCharge, PARKING_RATE_PER_HOUR } from '../../utils/parkingFee';
+import LanguageToggle from '../../components/LanguageToggle';
 
-export default function KioskDisplays() {
+export default function KioskDisplays({ language = 'th', onToggleLanguage }) {
   const [activeTab, setActiveTab] = useState('exit'); // entry หรือ exit
   const [selectedPlate, setSelectedPlate] = useState('1กก-9999');
   const [showQRModal, setShowQRModal] = useState(false);
@@ -22,6 +23,9 @@ export default function KioskDisplays() {
 
   return (
     <div className="min-h-screen bg-[#F5F7FA] text-[#172B4D] p-6 flex flex-col items-center">
+      <div className="mb-3 flex w-full max-w-4xl justify-end">
+        <LanguageToggle language={language} onToggle={onToggleLanguage} />
+      </div>
       {/* Switcher เลือกระหว่าง ทางเข้า กับ ทางออก */}
       <div className="flex gap-2 p-1.5 bg-white border border-[#E3E8EF] rounded-xl mb-6">
         <button
@@ -58,7 +62,7 @@ export default function KioskDisplays() {
             {/* ป้ายไฟดิจิทัลแสดงช่องจอดว่าง */}
             <div className="bg-[#172B4D] border-2 border-[#1685F8]/50 px-6 py-3 rounded-2xl text-center">
               <span className="text-xs text-white/80 block font-semibold">ช่องจอดว่างทั้งหมด</span>
-              <span className="text-4xl font-black font-mono text-[#1685F8]">{emptySlotsCount} คัน</span>
+              <span className="text-4xl font-black font-sans text-[#1685F8]">{emptySlotsCount} คัน</span>
             </div>
           </div>
 
@@ -71,7 +75,7 @@ export default function KioskDisplays() {
               <span className="text-xs text-[#5E6C84] uppercase tracking-widest block font-semibold">ผลการตรวจจับ</span>
               <div>
                 <p className="text-xs text-[#7A869A]">ป้ายทะเบียนที่ตรวจพบ</p>
-                <p className="text-4xl font-black text-[#1685F8] font-mono tracking-wider">{currentCar.plate}</p>
+                <p className="text-4xl font-black text-[#1685F8] font-sans tracking-wider">{currentCar.plate}</p>
               </div>
               <div>
                 <p className="text-xs text-[#7A869A]">ยี่ห้อ / รุ่นของรถ</p>
@@ -117,7 +121,7 @@ export default function KioskDisplays() {
             {/* รายละเอียดรถที่จับได้ */}
             <div className="bg-[#F5F7FA] p-6 rounded-2xl border border-[#E3E8EF] space-y-4">
               <span className="text-xs text-[#5E6C84] uppercase tracking-widest block font-semibold">ทะเบียนขาออก</span>
-              <div className="text-3xl font-black font-mono text-[#172B4D]">{currentCar.plate}</div>
+              <div className="text-3xl font-black font-sans text-[#172B4D]">{currentCar.plate}</div>
               <p className="text-sm text-[#172B4D]">{currentCar.brand}</p>
               <div className="text-xs text-[#5E6C84] pt-2 border-t border-[#E3E8EF] space-y-1">
                 <div>เวลาเข้า: {currentCar.entryTime} น.</div>

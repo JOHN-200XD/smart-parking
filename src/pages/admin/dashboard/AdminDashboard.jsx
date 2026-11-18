@@ -166,7 +166,7 @@ export default function AdminDashboard({ currentUser, onLogout, vehicles: vehicl
   const normalizedVehicleSearch = vehicleSearch.trim().toLowerCase().replace(/[\s-]/g, '');
   const filteredVehicles = vehicles.filter((car) => {
     if (!normalizedVehicleSearch) return true;
-    return [car.plate, car.brand, car.slotId, car.floor].some((value) => String(value || '').toLowerCase().replace(/[\s-]/g, '').includes(normalizedVehicleSearch));
+    return [car.plate, car.province, car.brand, car.slotId, car.floor].some((value) => String(value || '').toLowerCase().replace(/[\s-]/g, '').includes(normalizedVehicleSearch));
   });
   const vehiclePageSize = 10;
   const vehiclePageCount = Math.max(1, Math.ceil(filteredVehicles.length / vehiclePageSize));

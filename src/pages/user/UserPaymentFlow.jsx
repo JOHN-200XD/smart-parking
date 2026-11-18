@@ -22,7 +22,6 @@ import {
 } from 'lucide-react';
 import { mockCars } from '../../data/mockData';
 import { calculateParkingCharge } from '../../utils/parkingFee';
-import LanguageToggle from '../../components/LanguageToggle';
 
 const PARKING_LOCATION = 'ลานจอดรถตัวอย่าง';
 const GRACE_PERIOD_SECONDS = 15 * 60;
@@ -57,7 +56,7 @@ function getSlotZone(slotId) {
   return slotId?.split('-')[0] || '—';
 }
 
-export default function UserPaymentFlow({ language = 'th', onToggleLanguage }) {
+export default function UserPaymentFlow() {
   const [activeTab, setActiveTab] = useState('search');
   const [screen, setScreen] = useState('search');
   const [searchTerm, setSearchTerm] = useState('');
@@ -170,7 +169,6 @@ export default function UserPaymentFlow({ language = 'th', onToggleLanguage }) {
               <div className="mt-1 text-[9px] font-semibold tracking-wider text-[#7A869A]">SMART PARKING SERVICE</div>
             </div>
           </div>
-          <LanguageToggle language={language} onToggle={onToggleLanguage} />
         </header>
 
         <main className="flex flex-1 flex-col bg-[#F5F7FA] px-4 py-5">

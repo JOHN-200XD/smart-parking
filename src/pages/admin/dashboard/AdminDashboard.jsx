@@ -6,7 +6,6 @@ import AdminVehiclesPage from './pages/AdminVehiclesPage.jsx';
 import AdminFinancePage from './pages/AdminFinancePage.jsx';
 import AdminActivityPage from './pages/AdminActivityPage.jsx';
 import AdminPermissionsPage from './pages/AdminPermissionsPage.jsx';
-import LanguageToggle from '../../../components/LanguageToggle.jsx';
 import {
   Activity,
   Building2,
@@ -42,7 +41,7 @@ const PERMISSION_OPTIONS = [
   { key: 'activity', label: 'รายงานการใช้งานและความหนาแน่น' },
 ];
 
-export default function AdminDashboard({ currentUser, onLogout, vehicles: vehiclesProp, slots: slotsProp, setSlots: setSlotsProp, language = 'th', onToggleLanguage }) {
+export default function AdminDashboard({ currentUser, onLogout, vehicles: vehiclesProp, slots: slotsProp, setSlots: setSlotsProp }) {
   const [rolePermissions, setRolePermissions] = useState(() => {
     try {
       const saved = JSON.parse(localStorage.getItem('smart_parking_role_permissions') || '{}');
@@ -405,7 +404,7 @@ export default function AdminDashboard({ currentUser, onLogout, vehicles: vehicl
             <button onClick={() => setMobileNavOpen(true)} className="rounded-lg border border-[#E3E8EF] p-2 text-[#5E6C84] hover:bg-[#F5F7FA] lg:hidden" aria-label="เปิดเมนู"><Menu size={18} /></button>
             <div><p className="text-sm font-semibold text-[#172B4D]">{isSuperAdmin ? 'Platform Administration' : company.name}</p><p className="text-[11px] text-[#7A869A]">ระบบจัดการลานจอดรถอัจฉริยะ</p></div>
           </div>
-          <div className="flex items-center gap-2"><LanguageToggle language={language} onToggle={onToggleLanguage} /><div className="flex items-center gap-2 rounded-full border border-[#E3E8EF] bg-white px-3 py-1.5"><span className="h-2 w-2 rounded-full bg-emerald-500" /><span className="text-xs font-medium text-[#5E6C84]">ระบบตัวอย่าง</span></div></div>
+          <div className="flex items-center gap-2 rounded-full border border-[#E3E8EF] bg-white px-3 py-1.5"><span className="h-2 w-2 rounded-full bg-emerald-500" /><span className="text-xs font-medium text-[#5E6C84]">ระบบตัวอย่าง</span></div>
         </header>
         <main className="w-full flex-1 p-4 sm:p-6 lg:p-8">
           <div className="mx-auto max-w-[1440px]">{pageContent}</div>

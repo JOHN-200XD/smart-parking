@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Camera, CheckCircle2, XCircle, PhoneCall, QrCode, ArrowRight } from 'lucide-react';
 import { mockCars, mockSlots } from '../../data/mockData';
 import { calculateParkingCharge, PARKING_RATE_PER_HOUR } from '../../utils/parkingFee';
-import LanguageToggle from '../../components/LanguageToggle';
 
-export default function KioskDisplays({ language = 'th', onToggleLanguage }) {
+export default function KioskDisplays() {
   const [activeTab, setActiveTab] = useState('exit'); // entry หรือ exit
   const [selectedPlate, setSelectedPlate] = useState('1กก-9999');
   const [showQRModal, setShowQRModal] = useState(false);
@@ -23,9 +22,6 @@ export default function KioskDisplays({ language = 'th', onToggleLanguage }) {
 
   return (
     <div className="min-h-screen bg-[#F5F7FA] text-[#172B4D] p-6 flex flex-col items-center">
-      <div className="mb-3 flex w-full max-w-4xl justify-end">
-        <LanguageToggle language={language} onToggle={onToggleLanguage} />
-      </div>
       {/* Switcher เลือกระหว่าง ทางเข้า กับ ทางออก */}
       <div className="flex gap-2 p-1.5 bg-white border border-[#E3E8EF] rounded-xl mb-6">
         <button

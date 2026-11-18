@@ -1,12 +1,12 @@
 // src/pages/admin/AdminLogin.jsx
 import React, { useState } from 'react';
-import { Lock, User, ShieldAlert } from 'lucide-react';
+import { Eye, EyeOff, Lock, User, ShieldAlert } from 'lucide-react';
 import { mockUsers } from "../../../data/mockData";
-import LanguageToggle from '../../../components/LanguageToggle';
 
-export default function AdminLogin({ onLoginSuccess, language = 'th', onToggleLanguage }) {
+export default function AdminLogin({ onLoginSuccess }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
   const handleSubmit = (e) => {
@@ -38,7 +38,6 @@ export default function AdminLogin({ onLoginSuccess, language = 'th', onToggleLa
   return (
     <div className="min-h-[85vh] flex items-center justify-center p-4 bg-[#F5F7FA]">
       <div className="w-full max-w-md bg-white border border-[#E3E8EF] rounded-3xl p-8 shadow-2xl">
-        <div className="mb-3 flex justify-end"><LanguageToggle language={language} onToggle={onToggleLanguage} /></div>
         <div className="text-center mb-6">
           <div className="w-12 h-12 bg-[#1685F8]/10 text-[#1685F8] rounded-2xl flex items-center justify-center mx-auto mb-3 border border-[#1685F8]/20">
             <Lock size={24} />
@@ -75,13 +74,22 @@ export default function AdminLogin({ onLoginSuccess, language = 'th', onToggleLa
             <div className="relative">
               <Lock size={16} className="absolute left-3.5 top-3.5 text-[#7A869A]" />
               <input
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="password123"
-                className="w-full bg-[#F5F7FA] border border-[#E3E8EF] rounded-xl py-2.5 pl-10 pr-4 text-[#172B4D] focus:outline-none focus:border-[#1685F8] text-xs"
+                className="w-full bg-[#F5F7FA] border border-[#E3E8EF] rounded-xl py-2.5 pl-10 pr-11 text-[#172B4D] focus:outline-none focus:border-[#1685F8] text-xs"
                 required
               />
+              <button
+                type="button"
+                onClick={() => setShowPassword((visible) => !visible)}
+                aria-label={showPassword ? 'ซ่อนรหัสผ่าน' : 'แสดงรหัสผ่าน'}
+                aria-pressed={showPassword}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#7A869A] hover:text-[#1685F8] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1685F8] rounded"
+              >
+                {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+              </button>
             </div>
           </div>
 

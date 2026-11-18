@@ -2,6 +2,7 @@
 export const mockCars = [
   {
     id: "car-1",
+    province: "กรุงเทพมหานคร",
     plate: "1กก-9999",
     brand: "Honda Civic FE",
     entryTime: "10:15",
@@ -15,6 +16,7 @@ export const mockCars = [
   },
   {
     id: "car-2",
+    province: "เชียงใหม่",
     plate: "2ขข-1234",
     brand: "Toyota Camry",
     entryTime: "08:30",
@@ -28,6 +30,7 @@ export const mockCars = [
   },
   {
     id: "car-9",
+    province: "ชลบุรี",
     plate: "3ขพ-8821",
     brand: "Honda CR-V e:HEV",
     entryTime: "08:10",
@@ -41,6 +44,7 @@ export const mockCars = [
   },
   {
     id: "car-10",
+    province: "นนทบุรี",
     plate: "8กฮ-4321",
     brand: "Toyota Corolla Cross",
     entryTime: "09:40",
@@ -54,6 +58,7 @@ export const mockCars = [
   },
   {
     id: "car-11",
+    province: "ภูเก็ต",
     plate: "1ขบ-6712",
     brand: "Porsche Macan",
     entryTime: "07:15",
@@ -67,6 +72,7 @@ export const mockCars = [
   },
   {
     id: "car-12",
+    province: "ขอนแก่น",
     plate: "5ขม-9087",
     brand: "Nissan Kicks e-POWER",
     entryTime: "11:20",
@@ -80,6 +86,7 @@ export const mockCars = [
   },
   {
     id: "car-13",
+    province: "นครราชสีมา",
     plate: "4กศ-2345",
     brand: "MG4 Electric",
     entryTime: "10:50",
@@ -93,6 +100,7 @@ export const mockCars = [
   },
   {
     id: "car-14",
+    province: "ปทุมธานี",
     plate: "2ขจ-1199",
     brand: "Audi A5 Sportback",
     entryTime: "08:55",
@@ -106,6 +114,7 @@ export const mockCars = [
   },
   {
     id: "car-15",
+    province: "สมุทรปราการ",
     plate: "9กบ-6543",
     brand: "Toyota Fortuner Legender",
     entryTime: "06:40",
@@ -119,6 +128,7 @@ export const mockCars = [
   },
   {
     id: "car-16",
+    province: "เชียงราย",
     plate: "6ขล-7734",
     brand: "Volvo XC60 Recharge",
     entryTime: "09:05",
@@ -132,6 +142,7 @@ export const mockCars = [
   },
   {
     id: "car-17",
+    province: "ระยอง",
     plate: "3กว-3210",
     brand: "Isuzu D-Max Stealth",
     entryTime: "05:50",
@@ -145,6 +156,7 @@ export const mockCars = [
   },
   {
     id: "car-18",
+    province: "พระนครศรีอยุธยา",
     plate: "7ขต-5544",
     brand: "Hyundai IONIQ 5",
     entryTime: "11:05",
@@ -158,6 +170,7 @@ export const mockCars = [
   },
   {
     id: "car-19",
+    province: "สงขลา",
     plate: "8ขช-2891",
     brand: "Subaru Forester",
     entryTime: "10:00",
@@ -171,6 +184,7 @@ export const mockCars = [
   },
   {
     id: "car-20",
+    province: "นครปฐม",
     plate: "1ฌง-4509",
     brand: "Lexus NX 350h",
     entryTime: "08:15",
@@ -184,6 +198,7 @@ export const mockCars = [
   },
   {
     id: "car-21",
+    province: "สุราษฎร์ธานี",
     plate: "4ขฉ-9812",
     brand: "Honda City Hatchback",
     entryTime: "12:00",
@@ -197,6 +212,7 @@ export const mockCars = [
   },
   {
     id: "car-22",
+    province: "อุดรธานี",
     plate: "2กด-8877",
     brand: "Toyota Yaris Ativ",
     entryTime: "09:10",
@@ -210,6 +226,7 @@ export const mockCars = [
   },
   {
     id: "car-23",
+    province: "พิษณุโลก",
     plate: "5ฮภ-6006",
     brand: "Porsche Taycan 4S",
     entryTime: "07:30",
@@ -223,6 +240,7 @@ export const mockCars = [
   },
   {
     id: "car-24",
+    province: "บุรีรัมย์",
     plate: "9ขร-1478",
     brand: "GWM Ora Good Cat",
     entryTime: "11:35",
@@ -236,6 +254,7 @@ export const mockCars = [
   },
   {
     id: "car-25",
+    province: "ลำปาง",
     plate: "6ขด-3369",
     brand: "MINI Cooper S Countryman",
     entryTime: "10:30",
@@ -249,6 +268,7 @@ export const mockCars = [
   },
   {
     id: "car-26",
+    province: "ตรัง",
     plate: "7กต-4400",
     brand: "Mazda CX-30",
     entryTime: "08:40",
@@ -262,6 +282,7 @@ export const mockCars = [
   },
   {
     id: "car-27",
+    province: "กาญจนบุรี",
     plate: "1ขบ-9988",
     brand: "Tesla Model 3 Highland",
     entryTime: "12:15",
@@ -275,6 +296,7 @@ export const mockCars = [
   },
   {
     id: "car-28",
+    province: "กระบี่",
     plate: "8ขพ-1902",
     brand: "Mercedes-Benz E300e",
     entryTime: "06:30",

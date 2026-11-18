@@ -11,6 +11,7 @@ import {
   CreditCard,
   History,
   Info,
+  Map,
   MapPin,
   Navigation,
   ParkingCircle,
@@ -19,6 +20,7 @@ import {
   Search,
   ShieldCheck,
   WalletCards,
+  X,
 } from 'lucide-react';
 import { mockCars } from '../../data/mockData';
 import { calculateParkingCharge } from '../../utils/parkingFee';
@@ -61,6 +63,8 @@ export default function UserPaymentFlow() {
   const [screen, setScreen] = useState('search');
   const [searchTerm, setSearchTerm] = useState('');
   const [searchError, setSearchError] = useState('');
+  const [matchingCars, setMatchingCars] = useState([]);
+  const [isParkingMapOpen, setIsParkingMapOpen] = useState(false);
   const [selectedCar, setSelectedCar] = useState(null);
   const [currentTime, setCurrentTime] = useState(Date.now());
   const [timeLeft, setTimeLeft] = useState(GRACE_PERIOD_SECONDS);
@@ -100,17 +104,24 @@ export default function UserPaymentFlow() {
       return;
     }
 
-    const found = mockCars.find((car) =>
-      car.plate.replace(/[\s-]/g, '').toLocaleLowerCase('th-TH').includes(plate),
+    const found = mockCars.filter((car) =>
+      car.plate.replace(/[\s-]/g, '').toLocaleLowerCase('th-TH') === plate,
     );
 
-    if (!found) {
+    if (found.length === 0) {
       setSearchError('ไม่พบทะเบียนนี้ในลานจอดรถที่เลือก กรุณาตรวจสอบอีกครั้ง');
       return;
     }
 
     setSearchError('');
-    setSelectedCar(found);
+    if (found.length > 1) {
+      setMatchingCars(found);
+      setScreen('province');
+      return;
+    }
+
+    setMatchingCars([]);
+    setSelectedCar(found[0]);
     setCurrentTime(Date.now());
     setScreen('details');
     setActiveTab('search');
@@ -120,6 +131,7 @@ export default function UserPaymentFlow() {
     setSearchTerm('');
     setSearchError('');
     setSelectedCar(null);
+    setMatchingCars([]);
     setTimeLeft(GRACE_PERIOD_SECONDS);
     setScreen('search');
     setActiveTab('search');
@@ -261,6 +273,32 @@ export default function UserPaymentFlow() {
             </section>
           )}
 
+          {screen === 'province' && (
+            <section>
+              <button type="button" className="mb-3 inline-flex items-center gap-2 text-xs font-semibold text-[#5E6C84] hover:text-[#1685F8]" onClick={goToSearch}><ArrowLeft size={18} /> กลับไปค้นหา</button>
+              <div className="my-4">
+                <div className="text-[10px] font-bold uppercase tracking-wide text-[#1685F8]">CONFIRM LICENSE PLATE</div>
+                <h1>ยืนยันจังหวัดทะเบียน</h1>
+                <p className="text-sm text-[#7A869A]">พบรถทะเบียน {matchingCars[0]?.plate} มากกว่าหนึ่งคัน กรุณาเลือกจังหวัดบนป้ายทะเบียนเพื่อยืนยันรถของคุณ</p>
+              </div>
+              <div className="grid gap-3">
+                {matchingCars.map((car) => (
+                  <button key={car.id} type="button" className="rounded-xl border border-[#E3E8EF] bg-white p-4 text-left hover:border-[#1685F8] focus:outline-none focus:ring-2 focus:ring-[#1685F8]/30" onClick={() => {
+                    setSelectedCar(car);
+                    setCurrentTime(Date.now());
+                    setScreen('details');
+                    setActiveTab('search');
+                  }}>
+                    <span className="text-xs text-[#7A869A]">จังหวัด</span>
+                    <strong className="mt-1 block text-lg text-[#172B4D]">{car.province || 'ไม่ระบุจังหวัด'}</strong>
+                    <span className="mt-1 block text-sm text-[#5E6C84]">{car.plate} · {car.brand}</span>
+                    <span className="mt-1 block text-xs text-[#7A869A]">ตำแหน่งจอด {car.floor} / {car.slotId}</span>
+                  </button>
+                ))}
+              </div>
+            </section>
+          )}
+
           {screen === 'details' && selectedCar && parkingCharge && (
             <section >
               <button type="button" className="mb-3 inline-flex items-center gap-2 text-xs font-semibold text-[#5E6C84] hover:text-[#1685F8]" onClick={goToSearch}><ArrowLeft size={18} /> กลับไปค้นหา</button>
@@ -278,6 +316,7 @@ export default function UserPaymentFlow() {
                 <div className="p-4">
                   <span className="text-xs text-[#7A869A]">ทะเบียนรถ</span>
                   <div className="mt-1 text-2xl font-bold text-[#172B4D]">{selectedCar.plate}</div>
+                  <div className="mt-1 text-sm text-[#5E6C84]">ทะเบียน: {selectedCar.province || 'ไม่ระบุจังหวัด'}</div>
                   <div className="mt-1 text-sm text-[#5E6C84]">{selectedCar.brand}</div>
                 </div>
               </div>
@@ -285,7 +324,8 @@ export default function UserPaymentFlow() {
               <div className="mt-3 rounded-xl border border-[#E3E8EF] bg-white p-4">
                 <div className="mb-3 flex items-center gap-2">
                   <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#F2F8FF] text-[#1685F8]"><MapPin size={19} /></div>
-                  <div><h2>ตำแหน่งที่จอดรถ</h2><p>ตำแหน่งล่าสุดในลานจอดรถ</p></div>
+                  <div className="min-w-0 flex-1"><h2>ตำแหน่งที่จอดรถ</h2><p>ตำแหน่งล่าสุดในลานจอดรถ</p></div>
+                  <button type="button" onClick={() => setIsParkingMapOpen(true)} className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[#BFDBFE] bg-[#EFF6FF] text-[#1685F8] hover:bg-[#DBEAFE] focus:outline-none focus:ring-2 focus:ring-[#1685F8]/30" aria-label="เปิดแผนที่ช่องจอด" title="ดูแผนที่"><Map size={19} /></button>
                 </div>
                 <div className="mt-3 grid grid-cols-3 gap-2">
                   <div className="min-w-0 rounded-md bg-[#F5F7FA] p-2 text-xs"><span>ชั้นจอด</span><strong>{selectedCar.floor}</strong></div>
@@ -294,6 +334,32 @@ export default function UserPaymentFlow() {
                 </div>
                 <div className="mt-3 flex items-center gap-2 text-[11px] text-[#7A869A]"><Navigation size={15} /> กรุณาตรวจสอบป้ายบอกทางภายในอาคาร</div>
               </div>
+
+              {isParkingMapOpen && (
+                <div className="fixed inset-0 z-[90] flex items-center justify-center bg-slate-900/50 p-4" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setIsParkingMapOpen(false); }}>
+                  <section className="w-full max-w-sm rounded-2xl bg-white p-4 shadow-2xl" role="dialog" aria-modal="true" aria-labelledby="parking-map-title">
+                    <div className="mb-4 flex items-start gap-3">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#EFF6FF] text-[#1685F8]"><Map size={20} /></div>
+                      <div className="min-w-0 flex-1"><h2 id="parking-map-title" className="text-base font-bold text-[#172B4D]">แผนที่ช่องจอดรถ</h2><p className="mt-1 text-xs text-[#7A869A]">ชั้น {selectedCar.floor} · โซน {getSlotZone(selectedCar.slotId)} · ช่อง {selectedCar.slotId}</p></div>
+                      <button type="button" onClick={() => setIsParkingMapOpen(false)} className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-[#7A869A] hover:bg-[#F5F7FA]" aria-label="ปิดแผนที่"><X size={19} /></button>
+                    </div>
+                    <div className="rounded-lg border border-dashed border-[#C8D2DF] bg-[#F8FAFC] p-3">
+                      <div className="mb-3 text-center text-[10px] font-semibold tracking-[0.2em] text-[#7A869A]">ช่องจอด · โซน {getSlotZone(selectedCar.slotId)}</div>
+                      <div className="grid grid-cols-5 gap-2">
+                        {Array.from({ length: 25 }, (_, index) => {
+                          const slotNumber = String(index + 1).padStart(2, '0');
+                          const slotId = `${getSlotZone(selectedCar.slotId)}-${slotNumber}`;
+                          const isSelected = slotId === selectedCar.slotId;
+                          return <div key={slotId} className={`flex h-10 items-center justify-center rounded-md border text-xs font-semibold ${isSelected ? 'border-[#1685F8] bg-[#1685F8] text-white shadow-sm' : 'border-[#E3E8EF] bg-white text-[#A0AAB8]'}`} aria-current={isSelected ? 'location' : undefined}>{slotNumber}</div>;
+                        })}
+                      </div>
+                      <div className="mt-3 rounded bg-[#EDF2F7] py-1.5 text-center text-[10px] font-medium tracking-widest text-[#7A869A]">ทางเดิน</div>
+                    </div>
+                    <div className="mt-3 flex items-center gap-2 text-xs text-[#5E6C84]"><span className="h-3 w-3 rounded-sm bg-[#1685F8]" /> ช่องจอดรถของคุณ</div>
+                    <button type="button" onClick={() => setIsParkingMapOpen(false)} className="mt-4 w-full rounded-lg bg-[#1685F8] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#0866C6]">ปิดแผนที่</button>
+                  </section>
+                </div>
+              )}
 
               <div className="mt-3 rounded-xl border border-[#E3E8EF] bg-white p-4">
                 <div className="mb-3 flex items-center gap-2">

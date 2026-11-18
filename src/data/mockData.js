@@ -29,6 +29,20 @@ export const mockCars = [
       "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=600&auto=format&fit=crop",
   },
   {
+    id: "car-2",
+    province: "ราชบุรี",
+    plate: "2ขข-1234",
+    brand: "Toyota Camry",
+    entryTime: "08:30",
+    entryTimestamp: new Date(Date.now() - 4.5 * 3600 * 1000).toISOString(),
+    floor: "ชั้น 1",
+    slotId: "A-12",
+    hourlyRate: 30,
+    paid: true,
+    image:
+      "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=600&auto=format&fit=crop",
+  },
+  {
     id: "car-9",
     province: "ชลบุรี",
     plate: "3ขพ-8821",
